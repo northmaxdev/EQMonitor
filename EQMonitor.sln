@@ -3,11 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35208.52
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EQMonitor.Core", "EQMonitor.Core\EQMonitor.Core.csproj", "{8CDB8769-367D-4C4A-B15C-2D96A2B771DC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EQMonitor.Core", "EQMonitor.Core\EQMonitor.Core.csproj", "{8CDB8769-367D-4C4A-B15C-2D96A2B771DC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EQMonitor.CLI", "EQMonitor.CLI\EQMonitor.CLI.csproj", "{73EA9617-6FC3-4F0E-B34F-B85CE0CDC643}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EQMonitor.CLI", "EQMonitor.CLI\EQMonitor.CLI.csproj", "{73EA9617-6FC3-4F0E-B34F-B85CE0CDC643}"
+	ProjectSection(ProjectDependencies) = postProject
+		{8CDB8769-367D-4C4A-B15C-2D96A2B771DC} = {8CDB8769-367D-4C4A-B15C-2D96A2B771DC}
+	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EQMonitor.Core.Tests", "EQMonitor.Core.Tests\EQMonitor.Core.Tests.csproj", "{18447102-734D-4855-88ED-C3C83A3A57DD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EQMonitor.Core.Tests", "EQMonitor.Core.Tests\EQMonitor.Core.Tests.csproj", "{18447102-734D-4855-88ED-C3C83A3A57DD}"
+	ProjectSection(ProjectDependencies) = postProject
+		{8CDB8769-367D-4C4A-B15C-2D96A2B771DC} = {8CDB8769-367D-4C4A-B15C-2D96A2B771DC}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
