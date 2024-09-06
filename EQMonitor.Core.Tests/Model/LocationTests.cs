@@ -5,6 +5,8 @@ namespace EQMonitor.Core.Tests.Model
     [TestFixture]
     public class LocationTests
     {
+        // TODO: Remove unit tests for Description nulls/blanks
+
         private GeoPoint EiffelTowerCoordinates { get; init; } = new GeoPoint
         {
             Latitude = 48.8583,
