@@ -1,6 +1,4 @@
 ﻿namespace EQMonitor.Core.Model
 {
-    internal class Earthquake
-    {
-    }
+    public record class Earthquake(Location Location, double Magnitude, DateTimeOffset Timing);
 }
