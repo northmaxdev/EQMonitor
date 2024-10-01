@@ -4,11 +4,9 @@
     public sealed class ImmutableEarthquakeDataset : IEarthquakeDataset
     {
         public Earthquake? Strongest => throw new NotImplementedException();
-
         public Earthquake? Weakest => throw new NotImplementedException();
-
         public Earthquake? Latest => throw new NotImplementedException();
-
         public Earthquake? Earliest => throw new NotImplementedException();
+        public double AverageMagnitude => throw new NotImplementedException();
     }
 }
