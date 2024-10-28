@@ -18,7 +18,7 @@ public sealed class EarthquakeService(HttpClient httpClient)
     private const string BaseUrl = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary";
 
     // TODO: Implement this as async
-    public IEnumerable<Earthquake> GetData(TimePeriod timePeriod)
+    public IEnumerable<EarthquakeModel> GetData(TimePeriod timePeriod)
     {
         var httpRequest = new HttpRequestMessage(HttpMethod.Get, CreateUri(timePeriod));
         HttpResponseMessage response = httpClient.Send(httpRequest);
@@ -44,13 +44,13 @@ public sealed class EarthquakeService(HttpClient httpClient)
         return $"{BaseUrl}/{endpoint}.geojson";
     }
 
-    private static IEnumerable<Earthquake> ParseDto(FeatureCollection geoJsonFeatureCollection)
+    private static IEnumerable<EarthquakeModel> ParseDto(FeatureCollection geoJsonFeatureCollection)
     {
         foreach (Feature feature in geoJsonFeatureCollection.Features)
         {
             IDictionary<string, object> featureProperties = feature.Properties;
 
-            double magnitude = ((JsonElement) featureProperties["mag"]).GetDouble();
+            double magnitude = ((JsonElement)featureProperties["mag"]).GetDouble();
             long timestampInMilliseconds = ((JsonElement)featureProperties["time"]).GetInt64();
             string placeDescription = ((JsonElement)featureProperties["place"]).GetString() ?? throw new NullReferenceException("Bro wtf");
             Point point = (Point)feature.Geometry;
@@ -60,7 +60,7 @@ public sealed class EarthquakeService(HttpClient httpClient)
             var locationModel = new LocationModel(geoPointModel, placeDescription);
             DateTimeOffset registrationTimestamp = DateTimeOffset.FromUnixTimeMilliseconds(timestampInMilliseconds);
 
-            yield return new Earthquake(locationModel, magnitude, registrationTimestamp);
+            yield return new EarthquakeModel(locationModel, magnitude, registrationTimestamp);
         }
     }
 }
