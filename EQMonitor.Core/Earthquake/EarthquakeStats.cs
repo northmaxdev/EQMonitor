@@ -1,13 +1,7 @@
-﻿namespace EQMonitor.Core.Model;
+﻿namespace EQMonitor.Core.Earthquake;
 
 public sealed class EarthquakeStats
 {
-    public Earthquake? Strongest { get; }
-    public Earthquake? Weakest { get; }
-    public Earthquake? Latest { get; }
-    public Earthquake? Earliest { get; }
-    public double AverageMagnitude { get; }
-
     private EarthquakeStats(IEnumerable<Earthquake> dataset)
     {
         // https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca1851
@@ -19,6 +13,12 @@ public sealed class EarthquakeStats
         Earliest = datasetAsCollection.MinBy(earthquake => earthquake.RegistrationTimestamp);
         AverageMagnitude = datasetAsCollection.Average(earthquake => earthquake.Magnitude);
     }
+
+    public Earthquake? Strongest { get; }
+    public Earthquake? Weakest { get; }
+    public Earthquake? Latest { get; }
+    public Earthquake? Earliest { get; }
+    public double AverageMagnitude { get; }
 
     // Syntactic sugar for readability
     public static EarthquakeStats From(IEnumerable<Earthquake> dataset)
