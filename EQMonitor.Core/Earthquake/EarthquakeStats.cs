@@ -12,6 +12,7 @@ public sealed class EarthquakeStats
         Latest = datasetAsCollection.MaxBy(earthquake => earthquake.OccurrenceTimestamp);
         Earliest = datasetAsCollection.MinBy(earthquake => earthquake.OccurrenceTimestamp);
         AverageMagnitude = datasetAsCollection.Average(earthquake => earthquake.Magnitude);
+        Count = datasetAsCollection.Count;
     }
 
     public EarthquakeModel? Strongest { get; }
@@ -19,6 +20,7 @@ public sealed class EarthquakeStats
     public EarthquakeModel? Latest { get; }
     public EarthquakeModel? Earliest { get; }
     public double AverageMagnitude { get; }
+    public int Count { get; }
 
     // Syntactic sugar for readability
     public static EarthquakeStats From(IEnumerable<EarthquakeModel> dataset)
