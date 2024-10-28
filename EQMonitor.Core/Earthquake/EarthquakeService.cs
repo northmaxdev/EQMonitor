@@ -44,23 +44,29 @@ public sealed class EarthquakeService(HttpClient httpClient)
         return $"{BaseUrl}/{endpoint}.geojson";
     }
 
-    private static IEnumerable<EarthquakeModel> ParseDto(FeatureCollection geoJsonFeatureCollection)
+    // https://geojson.org/
+    // All type casts in this method should be safe because they're based specifically on the USGS response docs,
+    // and not the general GeoJSON spec.
+    private static IEnumerable<EarthquakeModel> ParseDto(FeatureCollection dto)
     {
-        foreach (Feature feature in geoJsonFeatureCollection.Features)
+        foreach (Feature feature in dto.Features)
         {
-            IDictionary<string, object> featureProperties = feature.Properties;
+            IDictionary<string, object> properties = feature.Properties;
 
-            double magnitude = ((JsonElement)featureProperties["mag"]).GetDouble();
-            long timestampInMilliseconds = ((JsonElement)featureProperties["time"]).GetInt64();
-            string placeDescription = ((JsonElement)featureProperties["place"]).GetString() ?? throw new NullReferenceException("Bro wtf");
+            // The USGS docs don't actually specify nullability for this property,
+            // but JsonElement.GetString() may return null and LocationModel.Description permits nulls, so why bother?
+            string? placeDescription = ((JsonElement)properties["place"]).GetString();
             Point point = (Point)feature.Geometry;
             IPosition coordinates = point.Coordinates;
-
             var geoPointModel = new GeoPointModel(coordinates.Longitude, coordinates.Latitude);
             var locationModel = new LocationModel(geoPointModel, placeDescription);
-            DateTimeOffset registrationTimestamp = DateTimeOffset.FromUnixTimeMilliseconds(timestampInMilliseconds);
 
-            yield return new EarthquakeModel(locationModel, magnitude, registrationTimestamp);
+            double magnitude = ((JsonElement)properties["mag"]).GetDouble();
+
+            long occurrenceUnixTimeInMillis = ((JsonElement)properties["time"]).GetInt64();
+            DateTimeOffset occurrenceTimestamp = DateTimeOffset.FromUnixTimeMilliseconds(occurrenceUnixTimeInMillis);
+
+            yield return new EarthquakeModel(locationModel, magnitude, occurrenceTimestamp);
         }
     }
 }
