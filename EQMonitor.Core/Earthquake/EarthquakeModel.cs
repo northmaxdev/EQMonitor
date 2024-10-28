@@ -2,4 +2,4 @@
 
 namespace EQMonitor.Core.Earthquake;
 
-public record EarthquakeModel(LocationModel OccurenceLocation, double Magnitude, DateTimeOffset RegistrationTimestamp);
+public record EarthquakeModel(LocationModel OccurrenceLocation, double Magnitude, DateTimeOffset OccurrenceTimestamp);

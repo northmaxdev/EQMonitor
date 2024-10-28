@@ -9,8 +9,8 @@ public sealed class EarthquakeStats
 
         Strongest = datasetAsCollection.MaxBy(earthquake => earthquake.Magnitude);
         Weakest = datasetAsCollection.MinBy(earthquake => earthquake.Magnitude);
-        Latest = datasetAsCollection.MaxBy(earthquake => earthquake.RegistrationTimestamp);
-        Earliest = datasetAsCollection.MinBy(earthquake => earthquake.RegistrationTimestamp);
+        Latest = datasetAsCollection.MaxBy(earthquake => earthquake.OccurrenceTimestamp);
+        Earliest = datasetAsCollection.MinBy(earthquake => earthquake.OccurrenceTimestamp);
         AverageMagnitude = datasetAsCollection.Average(earthquake => earthquake.Magnitude);
     }
 
