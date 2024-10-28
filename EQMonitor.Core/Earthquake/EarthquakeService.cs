@@ -17,18 +17,17 @@ public sealed class EarthquakeService(HttpClient httpClient)
 
     private const string BaseUrl = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary";
 
-    // TODO: Implement this as async
-    public IEnumerable<EarthquakeModel> GetData(TimePeriod timePeriod)
+    // TODO: Implement this as async (instead or in addition)?
+    public IReadOnlyCollection<EarthquakeModel> GetData(TimePeriod timePeriod)
     {
         var httpRequest = new HttpRequestMessage(HttpMethod.Get, CreateUri(timePeriod));
         HttpResponseMessage response = httpClient.Send(httpRequest);
         response.EnsureSuccessStatusCode();
 
-        string json = response.Content.ReadAsStringAsync().Result;
-        FeatureCollection featureCollection =
-            JsonSerializer.Deserialize<FeatureCollection>(json) ?? throw new NullReferenceException("Something happened bro");
+        Stream json = response.Content.ReadAsStream();
+        FeatureCollection dto = JsonSerializer.Deserialize<FeatureCollection>(json) ?? throw new NullReferenceException("DTO is null, bro");
 
-        return ParseDto(featureCollection);
+        return ParseDto(dto).ToList();
     }
 
     private static string CreateUri(TimePeriod timePeriod)
@@ -45,6 +44,7 @@ public sealed class EarthquakeService(HttpClient httpClient)
     }
 
     // https://geojson.org/
+    // https://earthquake.usgs.gov/earthquakes/feed/v1.0/geojson.php
     // All type casts in this method should be safe because they're based specifically on the USGS response docs,
     // and not the general GeoJSON spec.
     private static IEnumerable<EarthquakeModel> ParseDto(FeatureCollection dto)
