@@ -5,11 +5,6 @@ VisualStudioVersion = 17.11.35208.52
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EQMonitor.Core", "EQMonitor.Core\EQMonitor.Core.csproj", "{8CDB8769-367D-4C4A-B15C-2D96A2B771DC}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EQMonitor.CLI", "EQMonitor.CLI\EQMonitor.CLI.csproj", "{73EA9617-6FC3-4F0E-B34F-B85CE0CDC643}"
-	ProjectSection(ProjectDependencies) = postProject
-		{8CDB8769-367D-4C4A-B15C-2D96A2B771DC} = {8CDB8769-367D-4C4A-B15C-2D96A2B771DC}
-	EndProjectSection
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EQMonitor.Core.Tests", "EQMonitor.Core.Tests\EQMonitor.Core.Tests.csproj", "{18447102-734D-4855-88ED-C3C83A3A57DD}"
 	ProjectSection(ProjectDependencies) = postProject
 		{8CDB8769-367D-4C4A-B15C-2D96A2B771DC} = {8CDB8769-367D-4C4A-B15C-2D96A2B771DC}
@@ -27,10 +22,6 @@ Global
 		{8CDB8769-367D-4C4A-B15C-2D96A2B771DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8CDB8769-367D-4C4A-B15C-2D96A2B771DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8CDB8769-367D-4C4A-B15C-2D96A2B771DC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{73EA9617-6FC3-4F0E-B34F-B85CE0CDC643}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{73EA9617-6FC3-4F0E-B34F-B85CE0CDC643}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{73EA9617-6FC3-4F0E-B34F-B85CE0CDC643}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{73EA9617-6FC3-4F0E-B34F-B85CE0CDC643}.Release|Any CPU.Build.0 = Release|Any CPU
 		{18447102-734D-4855-88ED-C3C83A3A57DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{18447102-734D-4855-88ED-C3C83A3A57DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{18447102-734D-4855-88ED-C3C83A3A57DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
