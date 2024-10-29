@@ -3,31 +3,58 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:system="clr-namespace:System;assembly=System.Runtime"
         mc:Ignorable="d"
         Title="EQMonitor" Width="600" Height="400" MinWidth="450" MinHeight="300">
-    <Grid Margin="10">
+
+    <Window.Resources>
+        <Brush x:Key="PanelBackgroundColor">GhostWhite</Brush>
+        <Brush x:Key="PanelBorderColor">Silver</Brush>
+        <Thickness x:Key="PanelBorderThickness">1</Thickness>
+        <!-- "Side panels" are specifically the panels with user inputs, e.g. buttons -->
+        <Thickness x:Key="SidePanelMargin">7</Thickness>
+        <!-- For buttons, combo-boxes, etc. -->
+        <system:Double x:Key="UserInputMinHeight">30</system:Double>
+    </Window.Resources>
+
+    <Grid Margin="8">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="3*"></ColumnDefinition>
-            <ColumnDefinition Width="1*"></ColumnDefinition>
+            <ColumnDefinition Width="3*" />
+            <ColumnDefinition Width="1*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="2*"></RowDefinition>
-            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="2*" />
+            <RowDefinition Height="1*" />
         </Grid.RowDefinitions>
-        <DataGrid Name="DatasetView" Grid.Row="0" Grid.Column="0" Grid.RowSpan="2"></DataGrid>
 
-        <Border Margin="10,0,0,0" Grid.Row="0" Grid.Column="1" Background="GhostWhite" BorderBrush="Silver" BorderThickness="1">
-            <StackPanel Margin="7">
-                <ComboBox Name="TimePeriodSelector"></ComboBox>
-                <Button Name="FetchDataButton" Margin="0,7">Fetch data</Button>
-                <ProgressBar Name="FetchProgressBar" Value="50"></ProgressBar>
+        <DataGrid Name="DatasetView"
+                  Grid.Row="0" Grid.Column="0" Grid.RowSpan="2"
+                  Background="{StaticResource PanelBackgroundColor}"
+                  BorderBrush="{StaticResource PanelBorderColor}"
+                  BorderThickness="{StaticResource PanelBorderThickness}"
+                  Margin="0,0,8,0" />
+
+        <Border Grid.Row="0" Grid.Column="1"
+                Background="{StaticResource PanelBackgroundColor}"
+                BorderBrush="{StaticResource PanelBorderColor}"
+                BorderThickness="{StaticResource PanelBorderThickness}"
+                Margin="0,0,0,8">
+
+            <StackPanel Margin="{StaticResource SidePanelMargin}">
+                <ComboBox Name="TimePeriodSelector" MinHeight="{StaticResource UserInputMinHeight}" />
+                <Button Name="FetchDataButton" MinHeight="{StaticResource UserInputMinHeight}" Margin="0,7">Fetch data</Button>
+                <ProgressBar Name="FetchProgressBar" Value="50" MinHeight="15" />
             </StackPanel>
         </Border>
 
-        <Border Margin="10,10,0,0" Grid.Row="1" Grid.Column="1" Background="GhostWhite" BorderBrush="Silver" BorderThickness="1">
-            <StackPanel Margin="7">
-                <Button Name="ViewStatsButton">View stats</Button>
-                <Button Name="CsvExportButton" Margin="0,7">Export to CSV</Button>
+        <Border Grid.Row="1" Grid.Column="1"
+                Background="{StaticResource PanelBackgroundColor}"
+                BorderBrush="{StaticResource PanelBorderColor}"
+                BorderThickness="{StaticResource PanelBorderThickness}">
+
+            <StackPanel Margin="{StaticResource SidePanelMargin}">
+                <Button Name="ViewStatsButton" MinHeight="{StaticResource UserInputMinHeight}">View stats</Button>
+                <Button Name="CsvExportButton" MinHeight="{StaticResource UserInputMinHeight}" Margin="0,7">Export to CSV</Button>
             </StackPanel>
         </Border>
     </Grid>
