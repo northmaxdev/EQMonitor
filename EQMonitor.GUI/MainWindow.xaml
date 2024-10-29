@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:system="clr-namespace:System;assembly=System.Runtime"
         mc:Ignorable="d"
-        Title="EQMonitor" Width="600" Height="400" MinWidth="450" MinHeight="300">
+        Title="EQMonitor" Width="620" Height="450" MinWidth="450" MinHeight="300">
 
     <Window.Resources>
         <Brush x:Key="PanelBackgroundColor">GhostWhite</Brush>
@@ -15,7 +15,6 @@
         <Thickness x:Key="SidePanelMargin">7</Thickness>
         <!-- For buttons, combo-boxes, etc. -->
         <system:Double x:Key="UserInputMinHeight">30</system:Double>
-        <system:Double x:Key="ProgressBarMinHeight">17</system:Double>
     </Window.Resources>
 
     <Grid Margin="8">
@@ -42,9 +41,17 @@
                 Margin="0,0,0,8">
 
             <StackPanel Margin="{StaticResource SidePanelMargin}">
-                <ComboBox Name="TimePeriodSelector" MinHeight="{StaticResource UserInputMinHeight}" />
-                <Button Name="FetchDataButton" MinHeight="{StaticResource UserInputMinHeight}" Margin="0,7">Fetch data</Button>
-                <ProgressBar Name="FetchProgressBar" MinHeight="{StaticResource ProgressBarMinHeight}" />
+                <ComboBox Name="TimePeriodSelector"
+                          SelectedIndex="0"
+                          MinHeight="{StaticResource UserInputMinHeight}"
+                          VerticalContentAlignment="Center"
+                          HorizontalContentAlignment="Center" />
+
+                <Button Click="FetchDataButton_Click"
+                        MinHeight="{StaticResource UserInputMinHeight}"
+                        Margin="0,7">
+                    Fetch data
+                </Button>
             </StackPanel>
         </Border>
 
@@ -52,11 +59,9 @@
                 Background="{StaticResource PanelBackgroundColor}"
                 BorderBrush="{StaticResource PanelBorderColor}"
                 BorderThickness="{StaticResource PanelBorderThickness}">
-
             <StackPanel Margin="{StaticResource SidePanelMargin}">
-                <Button Name="ViewStatsButton" MinHeight="{StaticResource UserInputMinHeight}">View stats</Button>
-                <Button Name="CsvExportButton" MinHeight="{StaticResource UserInputMinHeight}" Margin="0,7">Export to CSV</Button>
-                <ProgressBar Name="CsvExportProgressBar" MinHeight="{StaticResource ProgressBarMinHeight}" />
+                <Label Name="EarthquakeCountComment" MinHeight="{StaticResource UserInputMinHeight}"></Label>
+                <Label Name="AverageMagnitudeComment" MinHeight="{StaticResource UserInputMinHeight}"></Label>
             </StackPanel>
         </Border>
     </Grid>
