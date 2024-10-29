@@ -17,8 +17,7 @@ public sealed class EarthquakeService(HttpClient httpClient)
 
     private const string BaseUrl = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary";
 
-    // TODO: Implement this as async (instead or in addition)?
-    public IReadOnlyCollection<EarthquakeModel> GetData(TimePeriod timePeriod)
+    public IEnumerable<EarthquakeModel> GetData(TimePeriod timePeriod)
     {
         var httpRequest = new HttpRequestMessage(HttpMethod.Get, CreateUri(timePeriod));
         HttpResponseMessage response = httpClient.Send(httpRequest);
@@ -27,7 +26,7 @@ public sealed class EarthquakeService(HttpClient httpClient)
         Stream json = response.Content.ReadAsStream();
         FeatureCollection dto = JsonSerializer.Deserialize<FeatureCollection>(json) ?? throw new NullReferenceException("DTO is null, bro");
 
-        return ParseDto(dto).ToList();
+        return ParseDto(dto);
     }
 
     private static string CreateUri(TimePeriod timePeriod)
