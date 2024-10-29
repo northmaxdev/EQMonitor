@@ -3,10 +3,32 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:EQMonitor.GUI"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="EQMonitor" Width="600" Height="400" MinWidth="450" MinHeight="300">
+    <Grid Margin="10">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*"></ColumnDefinition>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <DataGrid Name="DatasetView" Grid.Row="0" Grid.Column="0" Grid.RowSpan="2"></DataGrid>
 
+        <Border Margin="10,0,0,0" Grid.Row="0" Grid.Column="1" Background="GhostWhite" BorderBrush="Silver" BorderThickness="1">
+            <StackPanel Margin="7">
+                <ComboBox Name="TimePeriodSelector"></ComboBox>
+                <Button Name="FetchDataButton" Margin="0,7">Fetch data</Button>
+                <ProgressBar Name="FetchProgressBar" Value="50"></ProgressBar>
+            </StackPanel>
+        </Border>
+
+        <Border Margin="10,10,0,0" Grid.Row="1" Grid.Column="1" Background="GhostWhite" BorderBrush="Silver" BorderThickness="1">
+            <StackPanel Margin="7">
+                <Button Name="ViewStatsButton">View stats</Button>
+                <Button Name="CsvExportButton" Margin="0,7">Export to CSV</Button>
+            </StackPanel>
+        </Border>
     </Grid>
 </Window>

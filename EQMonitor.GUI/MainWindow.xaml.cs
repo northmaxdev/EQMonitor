@@ -1,16 +1,16 @@
-﻿using System.Net.Http;
-using EQMonitor.Core.Earthquake;
+﻿namespace EQMonitor.GUI;
 
-namespace EQMonitor.GUI;
-
-/// <summary>
-/// Interaction logic for MainWindow.xaml
-/// </summary>
 public partial class MainWindow
 {
     public MainWindow()
     {
+        // DatasetView
+        // TimePeriodSelector
+        // FetchDataButton
+        // FetchProgressBar
+        // ViewStatsButton
+        // CsvExportButton
+        
         InitializeComponent();
-        EarthquakeService service = new EarthquakeService(new HttpClient());
     }
 }
