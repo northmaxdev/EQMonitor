@@ -1,4 +1,6 @@
-﻿namespace EQMonitor.GUI;
+﻿using EQMonitor.Core.Earthquake;
+
+namespace EQMonitor.GUI;
 
 public partial class MainWindow
 {
@@ -10,7 +12,10 @@ public partial class MainWindow
         // FetchProgressBar
         // ViewStatsButton
         // CsvExportButton
-        
+        // CsvExportProgressBar
+
         InitializeComponent();
+
+        TimePeriodSelector.ItemsSource = Enum.GetValues<EarthquakeService.TimePeriod>();
     }
 }
